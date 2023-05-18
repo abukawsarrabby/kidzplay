@@ -8,8 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 const Main = () => {
     return (
         <div>
+            <div className='bg-base-200'>
+            <Header></Header>
+            </div>
             <div className='max-w-6xl mx-auto'>
-                <Header></Header>
                 <ToastContainer />
                 <Outlet></Outlet>
             </div>
