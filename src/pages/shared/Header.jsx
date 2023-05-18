@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
+import { Tooltip } from 'react-tooltip';
 
 const Header = () => {
 
-    const [users, setUsers] = useState(false);
+    const { user, logOut } = useContext(AuthContext);
+
+    // navMenu
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='allToys'>All Toys</Link></li>
         {
-            users &&
+            user &&
             <>
                 <li><Link to='myToys'>My Toys</Link></li>
                 <li><Link to='/addToy'>Add A Toy</Link></li>
@@ -16,6 +20,7 @@ const Header = () => {
         }
         <li><Link to='/blogs'>Blogs</Link></li>
     </>
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -36,18 +41,20 @@ const Header = () => {
             </div>
             <div className="navbar-end">
                 {
-                    users
-                        ?
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                            // data-tooltip-id="tooltip"
-                                {/* // data-tooltip-content={users?.displayName}  */}
-                                <img src={users?.photoURL} />
-                                {/* <Tooltip id='tooltip' /> */}
-                            </div>
-                        </label>
-                        :
-                        <Link to='login' className="btn-kidzplay">Login</Link>
+                    user
+                        ? <div className='flex'>
+
+                            <button onClick={logOut} className='btn-kidzplay'>LogOut</button>
+
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div data-tooltip-id="tooltip"
+                                    data-tooltip-content={user?.displayName} className="w-10 rounded-full">
+                                    <img src={user?.photoURL} />
+                                    <Tooltip id='tooltip' />
+                                </div>
+                            </label>
+                        </div>
+                        : <Link to='login' className="btn-kidzplay">Login</Link>
                 }
             </div>
         </div>
