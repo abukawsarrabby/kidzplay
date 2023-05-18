@@ -1,6 +1,6 @@
 import React from 'react';
 import car1 from '../../assets/photos/car.jpg'
-import car2 from '../../assets/photos/giorgio-trovato-p0OlRAAYXLY-unsplash.jpg'
+import car2 from '../../assets/photos/giorgio-trovato.jpg'
 import car3 from '../../assets/photos/ivan.jpg'
 import car4 from '../../assets/photos/gimmel.jpg'
 import car5 from '../../assets/photos/giorgio.jpg'

@@ -9,7 +9,7 @@ import Font from 'react-font'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <div>
     <React.StrictMode>
-      <Font family='Poppins'>
+      <Font family='Baloo Paaji 2'>
         <AuthProviders>
           <RouterProvider
             router={router}
