@@ -6,25 +6,21 @@ import { Tooltip } from 'react-tooltip';
 const Header = () => {
     const { user, logOut, loading } = useContext(AuthContext);
 
-    const navItems = !loading && (
+    const navItems =
         <>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/allToys'>All Toys</Link></li>
-            {user && (
-                <>
-                    <li><Link to='/myToys'>My Toys</Link></li>
-                    <li><Link to='/addToy'>Add A Toy</Link></li>
-                </>
-            )}
+            <li><Link to='/myToys'>My Toys</Link></li>
+            <li><Link to='/add-new-toy'>Add A Toy</Link></li>
+            <li><Link to='/add-new-category'>Add New Category</Link></li>
             <li><Link to='/blogs'>Blogs</Link></li>
         </>
-    );
 
     return (
         <div className='lg:px-24'>
             <div className="navbar sticky top-0 border-b border-base-300">
                 <div className="flex-1">
-                    <Link to='/' className="normal-case text-4xl font-extrabold">Kidz<span className='text-coral'>Play</span></Link>
+                    <Link to='/' className="normal-case text-5xl font-extrabold">Kidz<span className='text-coral'>Play</span></Link>
                 </div>
                 <div className="flex-none gap-2">
                     <div className="dropdown dropdown-end">
@@ -39,15 +35,14 @@ const Header = () => {
                                     </label>
                                     <ul tabIndex={0} className="mt-3 p-2 px-4 shadow py-4 space-y-2 dropdown-content bg-base-100 rounded-box w-52">
                                         <li>
-                                            <Link to='profile' className="justify-between">
+                                            <Link to='profile' className="justify-between font-bold">
                                                 Profile
-                                                <span className="badge">New</span>
                                             </Link>
                                         </li>
-                                        <li><button onClick={logOut} className='btn-link'>LogOut</button></li>
+                                        <li><button onClick={logOut} className='btn-link font-bold'>LogOut</button></li>
                                     </ul>
                                 </div>
-                            ) : !loading && (
+                            ) : (
                                 <Link to='/login' className="btn-kidzplay">Login</Link>
                             )}
                         </div>

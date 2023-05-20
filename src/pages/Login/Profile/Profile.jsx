@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProviders';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { updateProfile } from 'firebase/auth';
+import Swal from 'sweetalert2';
 
 const Profile = () => {
 
@@ -26,11 +26,21 @@ const Profile = () => {
         })
             .then(() => {
                 navigate('/')
-                toast.success('Update Profile Successfully.');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Update Profile Successfully.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
             .catch(error => {
                 console.log(error.message);
-                toast.error('Update failed');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Update Profile Failed.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
     }
 
@@ -60,7 +70,7 @@ const Profile = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" name='email' placeholder="email" disabled defaultValue={user?.email} className="input input-bordered" />
+                            <input type="email" name='email' placeholder="email" readOnly defaultValue={user?.email} className="input input-bordered" />
                         </div>
                         <div className="form-control mt-3">
                             <button className="btn-kidzplay text-white">Update</button>

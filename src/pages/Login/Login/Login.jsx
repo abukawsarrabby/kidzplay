@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AuthContext } from '../../../providers/AuthProviders';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaGoogle } from 'react-icons/fa';
-import { toast } from 'react-toastify';
+import { FcGoogle } from "react-icons/fc";
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
-    const { signIn, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
+    const { user, loading, signIn, signInWithGoogle } = useContext(AuthContext);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -26,14 +26,35 @@ const Login = () => {
                 console.log(loggedUser);
                 form.reset();
                 navigate(from, { replace: true });
-                toast.success("Login Successfull");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
             .catch(error => {
                 console.log(error);
-                toast.error('Something went wrong. Please try again later.');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Something went wrong. Please try again later.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             });
     };
 
+    // Redirect to homepage if user is available
+    useEffect(() => {
+        if (user) {
+            if (loading) {
+
+                navigate('/');
+            }
+        }
+    }, [user, navigate]);
+
+    //handle sign in with google popup
     const handleGoogleSignIn = () => {
         const from = location.state?.from || '/';
 
@@ -41,11 +62,21 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 navigate(from, { replace: true });
-                toast.success("Login Successfull With Your Gmail");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
             .catch(error => {
                 console.log(error);
-                toast.error('Something went wrong. Please try again later.');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Something went wrong. Please try again later.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             });
     };
 
@@ -79,17 +110,15 @@ const Login = () => {
                         <div className="flex flex-col">
                             {/* <!-- Divider --> */}
                             <div
-                                classNmae="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+                                className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
                                 <p
                                     className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
                                     OR
                                 </p>
                             </div>
                             <button onClick={handleGoogleSignIn} type="button" className="btn btn-outline btn-error mb-4 text-white">
-                                <span className="flex justify-center items-center">
-                                    <FaGoogle />
-                                    <span> Sign in with Google</span>
-                                </span>
+                                <FcGoogle className="mr-2 text-4xl" />
+                                <span> Sign in with Google</span>
                             </button>
                         </div>
 

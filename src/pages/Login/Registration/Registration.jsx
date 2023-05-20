@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProviders';
 import { updateProfile } from 'firebase/auth';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const Register = () => {
 
@@ -26,13 +27,29 @@ const Register = () => {
                 form.reset();
                 updateUserData(loggedUser, name, ImageURL);
                 navigate('/login')
-                toast.success('Registration Successfull. Please login!!');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registration Successfull. Please login!!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
             .catch(error => {
                 console.log(error)
-                toast.error('Registration failed');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration failed. Please Try Again Later!!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
     }
+
+    useEffect(() => {
+        if (user) {
+            navigate('/');
+        }
+    }, [user, navigate]);
 
     const updateUserData = (user, name, photoUrl) => {
         updateProfile(user, {

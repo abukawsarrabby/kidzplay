@@ -1,52 +1,76 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword,
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut
+} from "firebase/auth";
 import app from '../firebase/firebase.config';
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
-
-//authProvider
 const googleAuthProvider = new GoogleAuthProvider();
 
-
 const AuthProviders = ({ children }) => {
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const createUser = (email, password) => {
 
-        //validate
+
+        // Validate password
         if (!/(?=.*[A-Z])/.test(password)) {
-            toast.error('Please add at least one uppercase')
+            Swal.fire({
+                icon: 'error',
+                title: 'Please add at least one uppercase',
+                showConfirmButton: false,
+                timer: 1500
+            });
             return;
-        }
-        else if (!/(?=.*[0-9].*[0-9])/.test(password)) {
-            toast.error('Please add two number')
+        } else if (!/(?=.*[0-9].*[0-9])/.test(password)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Please add two numbers',
+                showConfirmButton: false,
+                timer: 1500
+            });
             return;
-        }
-        else if (password.length < 6) {
-            toast.error('Please add six digit number')
+        } else if (password.length < 6) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Please add a six-digit number',
+                showConfirmButton: false,
+                timer: 1500
+            });
             return;
         }
         return createUserWithEmailAndPassword(auth, email, password);
-    }
+    };
 
     const signIn = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password);
-    }
+    };
 
     const signInWithGoogle = () => {
         return signInWithPopup(auth, googleAuthProvider);
-    }
-
+    };
 
     const logOut = () => {
-        return signOut(auth);
-    }
+        Swal.fire({
+            icon: 'success',
+            title: 'You have successfully logged out',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        signOut(auth);
+    };
 
-    // observe auth state change
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             console.log('auth state change', currentUser);
@@ -56,9 +80,8 @@ const AuthProviders = ({ children }) => {
 
         return () => {
             unsubscribe();
-        }
-
-    }, [])
+        };
+    }, []);
 
     const authInfo = {
         user,
@@ -67,7 +90,7 @@ const AuthProviders = ({ children }) => {
         signIn,
         signInWithGoogle,
         logOut
-    }
+    };
 
     return (
         <AuthContext.Provider value={authInfo}>

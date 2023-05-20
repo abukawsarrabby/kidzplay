@@ -9,6 +9,8 @@ import MyToys from "../components/MyToys";
 import Login from "../pages/Login/Login/Login";
 import Registration from "../pages/Login/Registration/Registration";
 import Profile from "../pages/Login/Profile/Profile";
+import AddCategory from "../components/AddCategory";
+import UpdateToy from "../components/UpdateToy";
 
 const router = createBrowserRouter([
     {
@@ -37,16 +39,27 @@ const router = createBrowserRouter([
                 element: <Blog></Blog>
             },
             {
-                path: 'addToy',
-                element: <AddToy></AddToy>
+                path: 'add-new-toy',
+                element: <AddToy></AddToy>,
+                loader: () => fetch('http://localhost:5000/categorys')
             },
             {
                 path: 'allToys',
-                element: <AllToys></AllToys>
+                element: <AllToys></AllToys>,
+                loader: () => fetch('http://localhost:5000/toys')
             },
             {
                 path: 'myToys',
                 element: <MyToys></MyToys>
+            },
+            {
+                path: 'updateToy/:id',
+                element: <UpdateToy></UpdateToy>,
+                loader: ({ params }) => fetch(`http://localhost:5000/toys/${params.id}`)
+            },
+            {
+                path: 'add-new-category',
+                element: <AddCategory></AddCategory>
             }
         ]
     }

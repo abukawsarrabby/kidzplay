@@ -2,6 +2,7 @@ import React from 'react';
 import main from '../../assets/About/main.jpg';
 import corner from '../../assets/About/corner.jpg';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 const About = () => {
@@ -12,10 +13,17 @@ const About = () => {
                     <div className="lg:w-1/2 hidden lg:block">
                         <div className="relative w-full h-full">
                             <div>
-                                <img src={main} alt="img" />
+                                <LazyLoadImage
+                                    alt="Banner"
+                                    src={main}
+                                />
                             </div>
                             <div className="absolute  -left-7 -bottom-7 border-[20px] border-t-[#fff] border-r-[#fff] bg-transparent rounded-none">
-                                <img className='' src={corner} alt="img" />
+                                <LazyLoadImage
+                                    alt="Banner"
+                                    src={corner}
+                                    className='overflow-hidden'
+                                />
                             </div>
                             <div className="absolute right-0 top-0 bg-coral p-5 text-2xl mt-0 min-w-[300px] text-[#fff]">
                                 <span className='flex justify-center items-center'>
@@ -32,13 +40,13 @@ const About = () => {
                     <div className="lg:w-1/2">
                         <div className="relative lg:pl-4">
                             <div className="relative max-w-[640px]">
-                                <span className="font-bold text-coral my-10">About us</span>
-                                <h3 className="text-6xl font-extrabold">
+                                <span className="font-bold text-coral">About us</span>
+                                <h3 className="text-6xl my-5 font-extrabold">
                                     Best Toys From <span className="text-coral">Best Shop</span>
                                 </h3>
                                 <h4 className='my-5 font-bold text-3xl'>Customers’ favorite products this week.</h4>
                             </div>
-                            <div className="sigma_about-content">
+                            <div>
                                 <p>
                                     The golden age of toy development was at the turn of the toys Real wages were rising steadily in
                                     the Western world, allowing even working-class families to afford toys for their children, and
