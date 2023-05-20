@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Modal from './Modal';
 
 const AllToys = () => {
     const toys = useLoaderData();
-
     return (
         <div>
             <h1 className='text-5xl text-center font-bold my-10'>Total toys: {toys?.length}</h1>
@@ -16,7 +16,7 @@ const AllToys = () => {
                             <th>Toy Name</th>
                             <th>Sub-category</th>
                             <th>Price</th>
-                            <th>Available Quantity</th>
+                            <th>Quantity</th>
                             <th>See Details</th>
                         </tr>
                     </thead>
@@ -29,7 +29,15 @@ const AllToys = () => {
                                 <td>{toy?.subCategory}</td>
                                 <td>{'$' + toy?.price}</td>
                                 <td>{toy?.quantity}</td>
-                                <td><button className='btn-kidzplay'>View Details</button></td>
+                                <td>
+                                    <label
+                                        htmlFor={`my-modal-${toy?._id}`} className="btn-kidzplay">View Details
+                                    </label>
+                                    <Modal
+                                        key={toy?._id}
+                                        toy={toy}
+                                    ></Modal>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

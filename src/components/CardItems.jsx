@@ -16,8 +16,6 @@ const CardItems = ({ category }) => {
     }, []);
 
 
-    console.log(toys)
-
 
     return (
         <div>
