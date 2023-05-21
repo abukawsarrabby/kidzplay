@@ -22,9 +22,6 @@ const ShopByCategory = () => {
             delay: 50,
         });
     }, [])
-    useEffect(() => {
-
-    }, [])
     return (
         <div data-aos="zoom-in" className='text-center p-10 min-h-screen'>
             <h1 className='text-5xl font-bold mt-10'> Shop By Category</h1>

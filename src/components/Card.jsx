@@ -22,7 +22,7 @@ const Card = ({ toy }) => {
                         <h2 className='text-sm font-bold text-center'>Rating:
                             <Rating
                                 className='text-xs'
-                                style={{ maxWidth: 180 }}
+                                style={{ maxWidth: 100 }}
                                 value={toy?.rating}
                                 readOnly
                                 emptySymbol={<i className="far fa-star"></i>}

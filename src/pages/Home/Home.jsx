@@ -4,6 +4,7 @@ import Gallery from './Gallery';
 import ShopByCategory from './ShopByCategory';
 import About from './About';
 import PageTitle from '../../components/PageTitle';
+import CustomerReview from './CustomerReview';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <Gallery></Gallery>
             <ShopByCategory></ShopByCategory>
             <About></About>
+            <CustomerReview></CustomerReview>
         </div>
     );
 };

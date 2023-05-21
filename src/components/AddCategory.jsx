@@ -105,7 +105,7 @@ const AddCategory = () => {
     };
 
     return (
-        <div className='md:grid md:grid-cols-2 md:gap-5'>
+        <div className='md:grid md:grid-cols-2 md:gap-2'>
             <PageTitle title='Add New Category'></PageTitle>
             {/* add new category */}
             <div className="md:p-16 min-h-screen">
@@ -129,7 +129,7 @@ const AddCategory = () => {
 
             {/* category list */}
             <div className='p-5'>
-                <h1 className='text-3xl text-center font-bold my-10'>Total Categories: {categories?.length}</h1>
+                <h1 className='text-3xl text-center font-bold mb-10 md:my-10'>Total Categories: {categories?.length}</h1>
                 <div className="overflow-x-auto">
                     <table className="table table-compact w-full">
                         <thead>
