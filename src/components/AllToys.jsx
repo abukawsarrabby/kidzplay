@@ -18,7 +18,7 @@ const AllToys = () => {
         event.preventDefault();
         const query = searchValue;
         console.log(query)
-        fetch(`http://localhost:5000/search?toyName=${query}`)
+        fetch(`kidzplay-server.vercel.app/search?toyName=${query}`)
             .then(res => res.json())
             .then(data => {
                 setSearchQuery(data);

@@ -11,7 +11,7 @@ const MyToys = () => {
     const [toys, setToys] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/mytoys?email=${user?.email}`)
+        fetch(`kidzplay-server.vercel.app/mytoys?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setToys(data)
@@ -23,7 +23,7 @@ const MyToys = () => {
         event.preventDefault();
         const type = event.target.value;
 
-        fetch(`http://localhost:5000/mytoys?email=${user.email}&type=${type}`)
+        fetch(`kidzplay-server.vercel.app/mytoys?email=${user.email}&type=${type}`)
             .then(res => res.json())
             .then(data => {
                 setToys(data);
@@ -43,7 +43,7 @@ const MyToys = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then(result => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/toys/${id}`, {
+                fetch(`kidzplay-server.vercel.app/toys/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => {

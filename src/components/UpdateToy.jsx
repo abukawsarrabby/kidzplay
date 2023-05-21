@@ -12,7 +12,7 @@ const UpdateToy = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/categorys')
+        fetch('kidzplay-server.vercel.app/categorys')
             .then(res => res.json())
             .then(data => {
                 setCategories(data)
@@ -52,7 +52,7 @@ const UpdateToy = () => {
             productDescription
         }
 
-        fetch(`http://localhost:5000/toys/${_id}`, {
+        fetch(`kidzplay-server.vercel.app/toys/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
