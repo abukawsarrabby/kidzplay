@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../providers/AuthProviders';
 import { Link } from 'react-router-dom';
-import { FcDeleteDatabase, FcDeleteRow, FcEditImage } from 'react-icons/fc';
+import { FcDeleteDatabase, FcEditImage } from 'react-icons/fc';
 import PageTitle from './PageTitle';
 
 const MyToys = () => {
@@ -17,6 +17,19 @@ const MyToys = () => {
                 setToys(data)
             })
     }, [user])
+
+    // handle sort by 
+    const handleSortBy = event => {
+        event.preventDefault();
+        const type = event.target.value;
+
+        fetch(`http://localhost:5000/mytoys?email=${user.email}&type=${type}`)
+            .then(res => res.json())
+            .then(data => {
+                setToys(data);
+            });
+    };
+
 
     //handle delete function
     const handleDelete = id => {
@@ -48,10 +61,19 @@ const MyToys = () => {
         });
     };
 
+
+
     return (
         <div>
             <PageTitle title='My Toys'></PageTitle>
-            <h1 className='text-5xl text-center font-bold my-10'>My toys: {toys?.length}</h1>
+            <h1 className='text-5xl text-center font-bold mt-10'>My toys: {toys?.length}</h1>
+            <div className="w-3/12 my-5 mx-auto">
+                <p className='font-bold text-lg my-2 text-center'>Sort By</p>
+                <select onChange={handleSortBy} className="select w-full max-w-xs select-error">
+                    <option>Ascending</option>
+                    <option>Descending</option>
+                </select>
+            </div>
             <div className="overflow-x-auto">
                 <table className="table table-compact w-full">
                     <thead>
@@ -75,7 +97,7 @@ const MyToys = () => {
                                 <td>{'$' + toy?.price}</td>
                                 <td>{toy?.quantity}</td>
                                 <td className='flex justify-around items-center'>
-                                    <Link className="tooltip tooltip-error" data-tip="Edit" to={`/updateToy/${toy._id}`}>
+                                    <Link className="tooltip tooltip-error" data-tip="Edit" to={`/ updateToy / ${toy._id} `}>
                                         <FcEditImage className='text-5xl' />
                                     </Link>
                                     <button className="tooltip tooltip-error" data-tip="Delete" onClick={() => handleDelete(toy._id)}>
