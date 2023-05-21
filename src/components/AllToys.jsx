@@ -1,11 +1,13 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Modal from './Modal';
+import PageTitle from './PageTitle';
 
 const AllToys = () => {
     const toys = useLoaderData();
     return (
         <div>
+            <PageTitle title='All Toys'></PageTitle>
             <h1 className='text-5xl text-center font-bold my-10'>Total toys: {toys?.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table table-compact w-full">

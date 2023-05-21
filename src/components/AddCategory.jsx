@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FcDeleteDatabase, FcEditImage } from 'react-icons/fc';
 import Swal from 'sweetalert2';
+import PageTitle from './PageTitle';
 
 const AddCategory = () => {
 
@@ -105,6 +106,7 @@ const AddCategory = () => {
 
     return (
         <div className='md:grid md:grid-cols-2 md:gap-5'>
+            <PageTitle title='Add New Category'></PageTitle>
             {/* add new category */}
             <div className="md:p-16 min-h-screen">
                 <div className="hero-content flex-col">

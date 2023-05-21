@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../providers/AuthProviders';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import PageTitle from './PageTitle';
 
 const UpdateToy = () => {
 
@@ -74,6 +75,7 @@ const UpdateToy = () => {
     }
     return (
         <div className="hero min-h-screen bg-gray-100">
+            <PageTitle title='Update Toy'></PageTitle>
             <div className="container mx-auto py-8">
                 <div className="max-w-4xl mx-auto">
                     <div className="card shadow-lg bg-white p-6">

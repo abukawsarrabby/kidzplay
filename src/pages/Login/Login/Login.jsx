@@ -3,6 +3,7 @@ import { AuthContext } from '../../../providers/AuthProviders';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import Swal from 'sweetalert2';
+import PageTitle from '../../../components/PageTitle';
 
 const Login = () => {
 
@@ -47,10 +48,7 @@ const Login = () => {
     // Redirect to homepage if user is available
     useEffect(() => {
         if (user) {
-            if (loading) {
-
-                navigate('/');
-            }
+            navigate('/');
         }
     }, [user, navigate]);
 
@@ -82,6 +80,7 @@ const Login = () => {
 
     return (
         <div className="hero min-h-screen">
+            <PageTitle title='Login'></PageTitle>
             <div className="hero-content flex-col md:w-2/5">
 
                 <div className="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100">

@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../providers/AuthProviders';
 import { Link } from 'react-router-dom';
 import { FcDeleteDatabase, FcDeleteRow, FcEditImage } from 'react-icons/fc';
+import PageTitle from './PageTitle';
 
 const MyToys = () => {
 
@@ -49,6 +50,7 @@ const MyToys = () => {
 
     return (
         <div>
+            <PageTitle title='My Toys'></PageTitle>
             <h1 className='text-5xl text-center font-bold my-10'>My toys: {toys?.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table table-compact w-full">

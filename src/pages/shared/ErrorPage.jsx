@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link, useRouteError } from 'react-router-dom'
 import errorImg from '../../assets/404/404.jpg'
+import PageTitle from '../../components/PageTitle'
 
 const ErrorPage = () => {
     const { error, status } = useRouteError()
     return (
         <section className='flex items-center h-screen p-16 bg-gray-100 text-gray-900'>
+            <PageTitle title='404'></PageTitle>
             <div className='container flex flex-col items-center justify-center px-5 mx-auto my-8'>
                 <img className='w-96 h-64' src={errorImg} alt="" />
                 <div className='max-w-md text-center'>

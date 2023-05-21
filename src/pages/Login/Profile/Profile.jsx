@@ -3,6 +3,7 @@ import { AuthContext } from '../../../providers/AuthProviders';
 import { useNavigate } from 'react-router-dom';
 import { updateProfile } from 'firebase/auth';
 import Swal from 'sweetalert2';
+import PageTitle from '../../../components/PageTitle';
 
 const Profile = () => {
 
@@ -46,6 +47,7 @@ const Profile = () => {
 
     return (
         <div className="hero h-screen">
+            <PageTitle title='Profile'></PageTitle>
             <div className="hero-content flex-col md:w-2/5">
 
                 <div className="card flex-shrink-0 w-full max-w-2xl  h-fit shadow-2xl bg-base-100">
