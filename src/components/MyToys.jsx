@@ -68,8 +68,9 @@ const MyToys = () => {
             <PageTitle title='My Toys'></PageTitle>
             <h1 className='text-5xl text-center font-bold mt-10'>My toys: {toys?.length}</h1>
             <div className="w-3/12 my-5 mx-auto">
-                <p className='font-bold text-lg my-2 text-center'>Sort By</p>
+                <p className='font-bold text-lg my-2 text-center'>Sort By Price:</p>
                 <select onChange={handleSortBy} className="select w-full max-w-xs select-error">
+                    <option disabled value="" defaultValue="" className="font-bold">Choose An Option</option>
                     <option>Ascending</option>
                     <option>Descending</option>
                 </select>
