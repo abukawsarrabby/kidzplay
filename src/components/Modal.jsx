@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { AuthContext } from '../providers/AuthProviders';
 
 const Modal = ({ toy }) => {
     return (
         <div className='w-full'>
-            <input type="checkbox" id={`my-modal-${toy?._id}`} className="modal-toggle hidden" />
             <label htmlFor={`my-modal-${toy?._id}`} className="modal cursor-pointer">
                 <div className="modal-box bg-coral w-11/12 max-w-5xl">
                     <label htmlFor={`my-modal-${toy?._id}`} className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>

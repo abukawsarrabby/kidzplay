@@ -1,22 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import Modal from './Modal';
 import PageTitle from './PageTitle';
+import { AuthContext } from '../providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 const AllToys = () => {
+
+    const { user } = useContext(AuthContext)
     const toys = useLoaderData();
+    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState(toys);
+    const [searchValue, setSearchValue] = useState('');
+
 
     const handleSearch = event => {
         event.preventDefault();
-        const query = event.target.value;
-
+        const query = searchValue;
+        console.log(query)
         fetch(`http://localhost:5000/search?toyName=${query}`)
             .then(res => res.json())
             .then(data => {
                 setSearchQuery(data);
             });
     };
+
+    const handleAlert = () => {
+        navigate('/login')
+        Swal.fire({
+            icon: 'info',
+            title: 'Please login to view details',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 
     return (
         <div>
@@ -25,10 +42,10 @@ const AllToys = () => {
             <div className='text-right my-5'>
                 <input
                     type="text"
+                    value={searchValue}
                     placeholder="Search by Toy Name"
                     className="input input-bordered input-error w-full mr-5 max-w-xs"
-                    // value={searchQuery}
-                    onChange={handleSearch}
+                    onChange={e => setSearchValue(e.target.value)}
                 />
                 <button className='btn-kidzplay' onClick={handleSearch}>Search</button>
             </div>
@@ -55,7 +72,10 @@ const AllToys = () => {
                                 <td>{'$' + toy?.price}</td>
                                 <td>{toy?.quantity}</td>
                                 <td>
-                                    <label htmlFor={`my-modal-${toy?._id}`} className="btn-kidzplay">View Details</label>
+                                    {user
+                                        ? <label htmlFor={`my-modal-${toy?._id}`} className="btn-kidzplay">View Details</label>
+                                        : <button onClick={handleAlert} className='btn-kidzplay'>View Details</button>
+                                    }
                                     <Modal key={toy?._id} toy={toy}></Modal>
                                 </td>
                             </tr>

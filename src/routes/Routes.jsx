@@ -11,6 +11,7 @@ import Registration from "../pages/Login/Registration/Registration";
 import Profile from "../pages/Login/Profile/Profile";
 import AddCategory from "../components/AddCategory";
 import UpdateToy from "../components/UpdateToy";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'profile',
-                element: <Profile></Profile>
+                element: <PrivateRoute><Profile></Profile></PrivateRoute>
             },
             {
                 path: 'blogs',
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'add-new-toy',
-                element: <AddToy></AddToy>,
+                element: <PrivateRoute><AddToy></AddToy></PrivateRoute>,
                 loader: () => fetch('http://localhost:5000/categorys')
             },
             {
@@ -50,16 +51,16 @@ const router = createBrowserRouter([
             },
             {
                 path: 'myToys',
-                element: <MyToys></MyToys>
+                element: <PrivateRoute><MyToys></MyToys></PrivateRoute>
             },
             {
                 path: 'updateToy/:id',
-                element: <UpdateToy></UpdateToy>,
+                element: <PrivateRoute><UpdateToy></UpdateToy></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/toys/${params.id}`)
             },
             {
                 path: 'add-new-category',
-                element: <AddCategory></AddCategory>
+                element: <PrivateRoute><AddCategory></AddCategory></PrivateRoute>
             }
         ]
     }

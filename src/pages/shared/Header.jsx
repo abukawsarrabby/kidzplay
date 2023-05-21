@@ -10,9 +10,13 @@ const Header = () => {
         <>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/allToys'>All Toys</Link></li>
-            <li><Link to='/myToys'>My Toys</Link></li>
-            <li><Link to='/add-new-toy'>Add A Toy</Link></li>
-            <li><Link to='/add-new-category'>Add New Category</Link></li>
+            {user && <>
+                <li>
+                    <Link to='/myToys'>My Toys</Link></li>
+                <li><Link to='/add-new-toy'>Add A Toy</Link></li>
+                <li><Link to='/add-new-category'>Add New Category</Link>
+                </li>
+            </>}
             <li><Link to='/blogs'>Blogs</Link></li>
         </>
 
