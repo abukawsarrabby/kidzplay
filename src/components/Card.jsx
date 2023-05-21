@@ -1,9 +1,22 @@
 import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/styles.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../providers/AuthProviders';
 
 const Card = ({ toy }) => {
+    const { user } = useContext(AuthContext);
+    const handleAlert = () => {
+        Swal.fire({
+            icon: 'info',
+            title: 'You need login to view details',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+
     return (
         <div>
             <div className="card h-[25rem] bg-base-100 mb-5 shadow-xl">
@@ -30,7 +43,10 @@ const Card = ({ toy }) => {
                             ></Rating>
                         </h2>
                         <div className='text-center'>
-                            <label htmlFor={`my-modal-${toy?._id}`} className="btn-kidzplay">View Details</label>
+                            {user
+                                ? <label htmlFor={`my-modal-${toy?._id}`} className="btn-kidzplay">View Details</label>
+                                : <button onClick={handleAlert} className='btn-kidzplay'>View Details</button>
+                            }
                         </div>
                     </div>
                 </div>

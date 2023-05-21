@@ -63,7 +63,7 @@ const About = () => {
                                     the Western world, allowing even working-class families to afford toys for their children, and
                                     industrial techniques.
                                 </p>
-                                <Link to="contact" className="btn-kidzplay my-5">
+                                <Link className="btn-kidzplay my-5">
                                     Contact Us
                                 </Link>
                             </div>
