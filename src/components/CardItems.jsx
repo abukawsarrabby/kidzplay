@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Card from './Card';
-import { AuthContext } from '../providers/AuthProviders';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const CardItems = ({ category }) => {
     const final = category.category;
@@ -13,6 +14,12 @@ const CardItems = ({ category }) => {
             .then(data => {
                 setToys(data);
             });
+        AOS.init({
+            offset: 200,
+            duration: 2000,
+            easing: 'ease-in-sine',
+            delay: 100,
+        });
     }, []);
 
 
@@ -23,6 +30,7 @@ const CardItems = ({ category }) => {
                 {toys &&
                     toys?.map(toy =>
                         <Card
+                            data-aos="fade-right"
                             key={toy._id}
                             toy={toy}
                         ></Card>
