@@ -16,7 +16,7 @@ const About = () => {
         });
     }, [])
     return (
-        <div className="relative py-10">
+        <div className="relative p-10">
             <div className="container">
                 <div className="flex gap-10 flex-row">
                     <div className="lg:w-1/2 hidden lg:block">

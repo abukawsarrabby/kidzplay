@@ -19,7 +19,7 @@ const Gallery = () => {
         });
     }, [])
     return (
-        <div data-aos="zoom-in" className='text-center overflow-hidden h-[44rem]'>
+        <div data-aos="zoom-in" className='text-center p-10 overflow-hidden h-[44rem]'>
             <h1 className='text-5xl font-bold mt-10'> Photo Galley</h1>
             <p className='my-5'>Here's the most beautifull toys car's photo gallery</p>
             <div className="md:grid md:grid-cols-3 gap-3">

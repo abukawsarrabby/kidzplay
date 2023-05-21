@@ -26,7 +26,7 @@ const ShopByCategory = () => {
 
     }, [])
     return (
-        <div data-aos="zoom-in" className='text-center min-h-screen'>
+        <div data-aos="zoom-in" className='text-center p-10 min-h-screen'>
             <h1 className='text-5xl font-bold mt-10'> Shop By Category</h1>
             <p className='my-5'>Discover a wide selection of products organized by category on our Shop By Category page.</p>
 
