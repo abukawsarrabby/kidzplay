@@ -4,6 +4,7 @@ import { AuthContext } from '../providers/AuthProviders';
 import { Link } from 'react-router-dom';
 import { FcDeleteDatabase, FcEditImage } from 'react-icons/fc';
 import PageTitle from './PageTitle';
+import Spinner from './Spinner';
 
 const MyToys = () => {
 
@@ -11,7 +12,7 @@ const MyToys = () => {
     const [toys, setToys] = useState([]);
 
     useEffect(() => {
-        fetch(`kidzplay-server.vercel.app/mytoys?email=${user?.email}`)
+        fetch(`https://kidzplay-server.vercel.app/mytoys?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setToys(data)
@@ -23,7 +24,7 @@ const MyToys = () => {
         event.preventDefault();
         const type = event.target.value;
 
-        fetch(`kidzplay-server.vercel.app/mytoys?email=${user.email}&type=${type}`)
+        fetch(`https://kidzplay-server.vercel.app/mytoys?email=${user.email}&type=${type}`)
             .then(res => res.json())
             .then(data => {
                 setToys(data);
@@ -43,7 +44,7 @@ const MyToys = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then(result => {
             if (result.isConfirmed) {
-                fetch(`kidzplay-server.vercel.app/toys/${id}`, {
+                fetch(`https://kidzplay-server.vercel.app/toys/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => {
@@ -67,13 +68,17 @@ const MyToys = () => {
         <div>
             <PageTitle title='My Toys'></PageTitle>
             <h1 className='text-5xl text-center font-bold mt-10'>My toys: {toys?.length}</h1>
-            <div className="w-3/12 my-5 mx-auto">
-                <p className='font-bold text-lg my-2 text-center'>Sort By Price:</p>
-                <select onChange={handleSortBy} className="select w-full max-w-xs select-error">
-                    <option disabled value="" defaultValue="" className="font-bold">Choose An Option</option>
-                    <option>Ascending</option>
-                    <option>Descending</option>
+            <div className="w-1/3 my-5 mx-auto">
+                {/* <p className='font-bold text-lg my-2 text-center'>Sort By Price:</p> */}
+                <select value="" onChange={handleSortBy} className="select w-full select-error">
+                    <option disabled value="" className="font-bold">
+                        Sort By Price
+                    </option>
+                    <option value="Ascending">Ascending</option>
+                    <option value="Descending">Descending</option>
                 </select>
+
+
             </div>
             <div className="overflow-x-auto">
                 <table className="table table-compact w-full">
@@ -89,24 +94,26 @@ const MyToys = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {toys?.map((toy, index) => (
-                            <tr key={index}>
-                                <th>{index + 1}</th>
-                                <td>{toy?.sellerName}</td>
-                                <td>{toy?.toyName}</td>
-                                <td>{toy?.subCategory}</td>
-                                <td>{'$' + toy?.price}</td>
-                                <td>{toy?.quantity}</td>
-                                <td className='flex justify-around items-center'>
-                                    <Link className="tooltip tooltip-error" data-tip="Edit" to={`/ updateToy / ${toy._id} `}>
-                                        <FcEditImage className='text-5xl' />
-                                    </Link>
-                                    <button className="tooltip tooltip-error" data-tip="Delete" onClick={() => handleDelete(toy._id)}>
-                                        <FcDeleteDatabase className='text-5xl' />
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
+                        {loading
+                            ? <Spinner />
+                            : toys && toys.map((toy, index) => (
+                                <tr key={index}>
+                                    <th>{index + 1}</th>
+                                    <td>{toy?.sellerName}</td>
+                                    <td>{toy?.toyName}</td>
+                                    <td>{toy?.subCategory}</td>
+                                    <td>{'$' + toy?.price}</td>
+                                    <td>{toy?.quantity}</td>
+                                    <td className='flex justify-around items-center'>
+                                        <Link className="tooltip tooltip-error" data-tip="Edit" to={`/updateToy/${toy._id}`}>
+                                            <FcEditImage className='text-5xl' />
+                                        </Link>
+                                        <button className="tooltip tooltip-error" data-tip="Delete" onClick={() => handleDelete(toy._id)}>
+                                            <FcDeleteDatabase className='text-5xl' />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                     </tbody>
                 </table>
             </div>

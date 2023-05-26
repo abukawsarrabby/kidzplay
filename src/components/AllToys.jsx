@@ -1,51 +1,35 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
-import Modal from './Modal';
+import React, { useRef, useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import PageTitle from './PageTitle';
-import { AuthContext } from '../providers/AuthProviders';
-import Swal from 'sweetalert2';
 
 const AllToys = () => {
 
-    const { user } = useContext(AuthContext)
+    const searchRef = useRef();
     const toys = useLoaderData();
-    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState(toys);
-    const [searchValue, setSearchValue] = useState('');
 
 
     const handleSearch = event => {
         event.preventDefault();
-        const query = searchValue;
-        console.log(query)
-        fetch(`kidzplay-server.vercel.app/search?toyName=${query}`)
+        const query = searchRef.current.value;
+        fetch(`https://kidzplay-server.vercel.app/search?toyName=${query}`)
             .then(res => res.json())
             .then(data => {
                 setSearchQuery(data);
             });
     };
 
-    const handleAlert = () => {
-        navigate('/login')
-        Swal.fire({
-            icon: 'info',
-            title: 'Please login to view details',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    }
 
     return (
-        <div>
+        <div className='px-5'>
             <PageTitle title='All Toys'></PageTitle>
             <h1 className='text-5xl text-center font-bold my-10'>Total toys: {toys?.length}</h1>
-            <div className='text-right my-5'>
+            <div className='flex justify-center items-center my-5'>
                 <input
                     type="text"
-                    value={searchValue}
                     placeholder="Search by Toy Name"
-                    className="input input-bordered input-error w-full mr-5 max-w-xs"
-                    onChange={e => setSearchValue(e.target.value)}
+                    className="input input-bordered input-error w-full mr-2 max-w-xs"
+                    ref={searchRef}
                 />
                 <button className='btn-kidzplay' onClick={handleSearch}>Search</button>
             </div>
@@ -72,12 +56,9 @@ const AllToys = () => {
                                 <td>{'$' + toy?.price}</td>
                                 <td>{toy?.quantity}</td>
                                 <td>
-                                    {user
-                                        ? <label htmlFor={`my-modal-${toy?._id}`} className="btn-kidzplay">View Details</label>
-                                        : <button onClick={handleAlert} className='btn-kidzplay'>View Details</button>
-                                    }
-                                    <Modal key={toy?._id} toy={toy}></Modal>
+                                    <Link to={`/toy-details/${toy._id}`} className='btn-kidzplay'>View Details</Link>
                                 </td>
+
                             </tr>
                         ))}
                     </tbody>

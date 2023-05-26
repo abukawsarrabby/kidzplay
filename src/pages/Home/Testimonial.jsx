@@ -1,9 +1,10 @@
 import { Rating } from '@smastrom/react-rating';
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Testimonial = ({ name, rating, picture }) => {
   return (
-    <section className="bg-gradient shadow-lg p-10 rounded-lg">
+    <section className="bg-gradient shadow-lg rounded-lg">
       <div className="container mx-auto">
         <div className="flex flex-wrap">
           <div className="">
@@ -28,7 +29,7 @@ const Testimonial = ({ name, rating, picture }) => {
               </div>
               <div className="flex items-center text-center justify-center mt-4">
                 <div className="mr-2">
-                  <img
+                  <LazyLoadImage
                     className="w-12 h-12 rounded-full"
                     src={picture}
                     alt=""

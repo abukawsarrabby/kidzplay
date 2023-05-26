@@ -4,22 +4,15 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const CardItems = ({ category }) => {
-    const final = category.category;
-    // const { user, loading } = useContext(AuthContext);
-    const [toys, setToys] = useState(null);
+    const categorys = category.category;
+    const [toys, setToys] = useState([]);
 
     useEffect(() => {
-        fetch(`kidzplay-server.vercel.app/toy?subCategory=${final}`)
+        fetch(`https://kidzplay-server.vercel.app/toy?subCategory=${categorys}`)
             .then(res => res.json())
             .then(data => {
                 setToys(data);
             });
-        AOS.init({
-            offset: 200,
-            duration: 2000,
-            easing: 'ease-in-sine',
-            delay: 100,
-        });
     }, []);
 
 
@@ -30,7 +23,6 @@ const CardItems = ({ category }) => {
                 {toys &&
                     toys?.map(toy =>
                         <Card
-                            data-aos="fade-right"
                             key={toy._id}
                             toy={toy}
                         ></Card>

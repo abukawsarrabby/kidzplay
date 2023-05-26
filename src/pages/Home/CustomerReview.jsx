@@ -7,14 +7,14 @@ const CustomerReview = () => {
 
     useEffect(() => {
         AOS.init({
-            // offset: 200,
-            duration: 200,
-            // easing: 'ease-in-sine',
-            // delay: 50,
+            offset: 200,
+            duration: 1000,
+            easing: 'ease-in-sine',
+            delay: 100,
         });
     }, [])
     return (
-        <div data-aos="zoom-in" className='text-center'>
+        <div data-aos="zoom-in" className='text-center px-5 mx-auto'>
             <h1 className='text-5xl font-bold mt-10'> CustomerReview</h1>
             <p className='my-5'>Discover a wide selection of products review from our client.</p>
             <div className="grid md:grid-cols-3 gap-5">

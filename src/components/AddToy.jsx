@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProviders';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -9,6 +9,7 @@ const AddToy = () => {
     const categories = useLoaderData();
     const { user, createUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    console.log(categories)
 
     const handleAddToy = event => {
         event.preventDefault();
@@ -39,7 +40,7 @@ const AddToy = () => {
         }
 
 
-        fetch('http://localhost:5000/toys', {
+        fetch('https://kidzplay-server.vercel.app/toys', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -94,16 +95,16 @@ const AddToy = () => {
                                         <label className="label">
                                             <span className="label-text">Sub-category</span>
                                         </label>
-                                        <select className="select select-bordered w-full" name="subCategory" required>
-                                            <option disabled value="" defaultValue="" className="font-bold">Choose A Category</option>
-                                            {
-                                                categories.map(category => (
+                                        <select className="select select-bordered w-full" name="subCategory" defaultValue="" required>
+                                            <option disabled value="" className="font-bold">Choose A Category</option>
+                                            {categories &&
+                                                categories.map((category) => (
                                                     <option key={category._id} value={category.category} className="font-bold">
                                                         {category.category}
                                                     </option>
-                                                ))
-                                            }
+                                                ))}
                                         </select>
+
                                     </div>
                                     <div className="form-control">
                                         <label className="label">

@@ -1,38 +1,36 @@
 import React, { useEffect } from 'react';
-import main from '../../assets/About/main.jpg';
-import corner from '../../assets/About/corner.jpg';
 import { Link } from 'react-router-dom';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const About = () => {
     useEffect(() => {
         AOS.init({
             offset: 200,
-            duration: 1000,
+            duration: 500,
             easing: 'ease-in-sine',
-            // delay: 100,
+            delay: 1000,
         });
     }, [])
     return (
-        <div className="relative p-10">
+        <div className="relative">
             <div className="container">
-                <div className="flex gap-10 flex-row">
-                    <div className="lg:w-1/2 hidden lg:block">
+                <div className="grid md:grid-cols-2 gap-10">
+                    <div className="">
                         <div
-                            className="relative w-full h-full">
+                            className="relative">
                             <div data-aos="zoom-in">
                                 <LazyLoadImage
                                     alt="Banner"
-                                    src={main}
+                                    src='https://i.ibb.co/7njNhkw/main.jpg'
                                 />
                             </div>
                             <div className="absolute  -left-7 -bottom-7 border-[20px] border-[#fff] bg-[#fff] rounded-none">
                                 <LazyLoadImage
-                                    data-aos="fade-up-right"
+                                    data-aos="fade-right"
                                     alt="Banner"
-                                    src={corner}
+                                    src="https://i.ibb.co/tHNVVYX/corner.jpg"
                                     className='overflow-hidden'
                                 />
                             </div>
@@ -48,8 +46,8 @@ const About = () => {
                             </div>
                         </div>
                     </div>
-                    <div data-aos="fade-left" className="lg:w-1/2">
-                        <div className="relative lg:pl-4">
+                    <div className="">
+                        <div className="relative">
                             <div className="relative max-w-[640px]">
                                 <span className="font-bold text-coral">About us</span>
                                 <h3 className="text-6xl my-5 font-extrabold">

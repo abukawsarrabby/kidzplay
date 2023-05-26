@@ -10,25 +10,25 @@ const ShopByCategory = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('kidzplay-server.vercel.app/categorys')
+        fetch('https://kidzplay-server.vercel.app/categorys')
             .then(res => res.json())
             .then(data => {
                 setCategories(data)
             })
         AOS.init({
-            offset: 200,
+            // offset: 200,
             duration: 200,
             easing: 'ease-in-sine',
             delay: 50,
         });
     }, [])
     return (
-        <div data-aos="zoom-in" className='text-center p-10 min-h-screen'>
-            <h1 className='text-5xl font-bold mt-10'> Shop By Category</h1>
-            <p className='my-5'>Discover a wide selection of products organized by category on our Shop By Category page.</p>
+        <div className='text-center min-h-screen'>
+            <h1 data-aos="zoom-in" className='text-5xl font-bold mt-10'> Shop By Category</h1>
+            <p data-aos="zoom-in" className='my-5'>Discover a wide selection of products organized by category on our Shop By Category page.</p>
 
             <Tabs>
-                <TabList className="bg-coral">
+                <TabList className="bg-coral text-[#fff]">
                     {categories &&
                         categories?.map(category => (
                             <Tab key={category?._id}><span className='font-bold text-2xl my-5 text-white'>{category?.category}</span></Tab>
@@ -38,12 +38,10 @@ const ShopByCategory = () => {
 
                 {categories &&
                     categories.map(category => (
-                        <TabPanel data-aos="fade-down" key={category?._id}>
-                            {/* <h2>{category?.category}</h2> */}
+                        <TabPanel key={category?._id}>
                             <CardItems
                                 category={category}
                             ></CardItems>
-
                         </TabPanel>
                     ))
                 }

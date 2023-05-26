@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
 import { Tooltip } from 'react-tooltip';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Header = () => {
     const { user, logOut, loading } = useContext(AuthContext);
@@ -29,11 +30,11 @@ const Header = () => {
                 <div className="flex-none gap-2">
                     <div className="dropdown dropdown-end">
                         <div className="navbar-end">
-                            {user ? (
+                            {user && !loading ? (
                                 <div className='flex'>
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         <div data-tooltip-id="tooltip" data-tooltip-content={user?.displayName} className="w-10 rounded-full">
-                                            <img src={user?.photoURL} alt="User Avatar" />
+                                            <LazyLoadImage src={user?.photoURL} alt="User Avatar" />
                                             <Tooltip id='tooltip' />
                                         </div>
                                     </label>
@@ -47,7 +48,7 @@ const Header = () => {
                                     </ul>
                                 </div>
                             ) : (
-                                <Link to='/login' className="btn-kidzplay">Login</Link>
+                                loading || <Link to='/login' className="btn-kidzplay">Login</Link>
                             )}
                         </div>
                     </div>
@@ -67,7 +68,11 @@ const Header = () => {
                     </div>
                     <div className="hidden lg:sticky top-0 lg:flex">
                         <ul className="flex gap-4 px-1">
-                            {navItems}
+                            {loading
+                                ? <>
+                                    <progress className="progress w-96"></progress>
+                                </>
+                                : navItems}
                         </ul>
                     </div>
                 </div>

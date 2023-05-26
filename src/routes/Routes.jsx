@@ -12,6 +12,7 @@ import Profile from "../pages/Login/Profile/Profile";
 import AddCategory from "../components/AddCategory";
 import UpdateToy from "../components/UpdateToy";
 import PrivateRoute from "./PrivateRoute";
+import ToyDetails from "../components/ToyDetails";
 
 const router = createBrowserRouter([
     {
@@ -42,21 +43,26 @@ const router = createBrowserRouter([
             {
                 path: 'add-new-toy',
                 element: <PrivateRoute><AddToy></AddToy></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/categorys')
+                loader: () => fetch('https://kidzplay-server.vercel.app/categorys')
             },
             {
                 path: 'allToys',
                 element: <AllToys></AllToys>,
-                loader: () => fetch('http://localhost:5000/toys')
+                loader: () => fetch('https://kidzplay-server.vercel.app/toys')
             },
             {
                 path: 'myToys',
                 element: <PrivateRoute><MyToys></MyToys></PrivateRoute>
             },
             {
+                path: 'toy-details/:id',
+                element: <PrivateRoute><ToyDetails></ToyDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`https://kidzplay-server.vercel.app/toys/${params.id}`)
+            },
+            {
                 path: 'updateToy/:id',
                 element: <PrivateRoute><UpdateToy></UpdateToy></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/toys/${params.id}`)
+                loader: ({ params }) => fetch(`https://kidzplay-server.vercel.app/toys/${params.id}`)
             },
             {
                 path: 'add-new-category',

@@ -6,13 +6,13 @@ import PageTitle from './PageTitle';
 
 const UpdateToy = () => {
 
-    const { user, createUser } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     const { _id, pictureUrl, price, productDescription, quantity, rating, subCategory, toyName } = useLoaderData();
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('kidzplay-server.vercel.app/categorys')
+        fetch('https://kidzplay-server.vercel.app/categorys')
             .then(res => res.json())
             .then(data => {
                 setCategories(data)
@@ -52,7 +52,7 @@ const UpdateToy = () => {
             productDescription
         }
 
-        fetch(`kidzplay-server.vercel.app/toys/${_id}`, {
+        fetch(`https://kidzplay-server.vercel.app/toys/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -104,8 +104,8 @@ const UpdateToy = () => {
                                     <label className="label">
                                         <span className="label-text">Sub-category</span>
                                     </label>
-                                    <select className="select select-bordered w-full" name="subCategory" defaultValue={subCategory} required>
-                                        <option disabled value="" defaultValue="" className="font-bold">Choose A Category</option>
+                                    <select className="select select-bordered w-full" name="subCategory" defaultValue={subCategory || ""} required>
+                                        <option disabled value="" className="font-bold">Choose A Category</option>
                                         {
                                             categories.map(category => (
                                                 <option key={category._id} value={category.category} className="font-bold">
@@ -114,7 +114,6 @@ const UpdateToy = () => {
                                             ))
                                         }
                                     </select>
-
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
