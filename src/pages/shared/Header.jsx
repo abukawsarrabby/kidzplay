@@ -3,9 +3,15 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
 import { Tooltip } from 'react-tooltip';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { FiShoppingCart } from 'react-icons/fi';
+import useCart from '../../hooks/useCart';
 
 const Header = () => {
+
     const { user, logOut, loading } = useContext(AuthContext);
+    const [cart, refetch] = useCart([]);
+
+    console.log('loading---------', loading)
 
     const navItems =
         <>
@@ -23,11 +29,15 @@ const Header = () => {
 
     return (
         <div className='lg:px-24'>
-            <div className="navbar sticky top-0 border-b border-base-300">
+            <div className="navbar border-b border-base-300">
                 <div className="flex-1">
                     <Link to='/' className="normal-case text-5xl font-extrabold">Kidz<span className='text-coral'>Play</span></Link>
                 </div>
-                <div className="flex-none gap-2">
+                <div className="flex-none gap-5">
+                    <Link to={'/cart'} className="relative inline-block">
+                        <FiShoppingCart className='text-3xl'></FiShoppingCart>
+                        <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-[#fff] transform translate-x-1/2 -translate-y-1/2 bg-coral rounded-full">{cart?.length || 0}</span>
+                    </Link>
                     <div className="dropdown dropdown-end">
                         <div className="navbar-end">
                             {user && !loading ? (
@@ -48,7 +58,7 @@ const Header = () => {
                                     </ul>
                                 </div>
                             ) : (
-                                loading || <Link to='/login' className="btn-kidzplay">Login</Link>
+                                !loading && <Link to='/login' className="btn-kidzplay">Login</Link>
                             )}
                         </div>
                     </div>

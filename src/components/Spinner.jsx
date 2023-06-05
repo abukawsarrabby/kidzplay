@@ -1,9 +1,17 @@
-import React from 'react';
+import { BeatLoader } from "react-spinners";
+
 
 const Spinner = () => {
     return (
-        <div className="my-5 animate-spin inline-block border-8 h-32 w-32 border-current border-t-transparent text-coral rounded-full" role="status" aria-label="loading">
-            <span className="sr-only">Loading...</span>
+        <div
+            className='
+      h-[70vh]
+      flex 
+      flex-col 
+      justify-center 
+      items-center 
+    '
+        ><BeatLoader size={64} color="rgb(255 107 107)" />
         </div>
     );
 };

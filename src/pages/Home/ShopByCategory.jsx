@@ -10,7 +10,7 @@ const ShopByCategory = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('https://kidzplay-server.vercel.app/categorys')
+        fetch('http://localhost:5000/categorys')
             .then(res => res.json())
             .then(data => {
                 setCategories(data)

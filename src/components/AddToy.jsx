@@ -40,7 +40,7 @@ const AddToy = () => {
         }
 
 
-        fetch('https://kidzplay-server.vercel.app/toys', {
+        fetch('http://localhost:5000/toys', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -57,8 +57,8 @@ const AddToy = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
+                    navigate('/myToys')
                 }
-                console.log(data);
             })
     }
 

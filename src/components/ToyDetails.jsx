@@ -3,10 +3,42 @@ import React from 'react';
 import { FcBookmark, FcManager, FcVoicemail } from 'react-icons/fc';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useLoaderData } from 'react-router-dom';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import { useContext } from 'react';
+import { AuthContext } from '../providers/AuthProviders';
+import Swal from 'sweetalert2';
+import useCart from '../hooks/useCart';
 
 const ToyDetails = () => {
+
     const toy = useLoaderData();
-    console.log(toy)
+    const { _id, toyName, pictureUrl, sellerName, sellerEmail, subCategory, price, rating } = toy;
+    const [axiosSecure] = useAxiosSecure();
+    const { user } = useContext(AuthContext);
+    const [, refetch] = useCart([]);
+
+    const handleAddToCart = () => {
+
+        const toyItem = { toyId: _id, toyName, email: user.email, pictureUrl, sellerName, sellerEmail, subCategory, price, rating }
+
+        axiosSecure.post('/carts', toyItem)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    refetch();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'AddToCart successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
         <div className="grid md:grid-cols-2 gap-5 p-5">
             <div className="">
@@ -32,7 +64,7 @@ const ToyDetails = () => {
                 <h1 className='font-bold text-xl'><FcManager className='' />Seller Info</h1>
                 <p><strong>Name: </strong>{toy?.sellerName}</p>
                 <p><strong>Email:</strong> {toy?.sellerEmail}</p>
-                <button className='btn-kidzplay mr-2 my-3'>Add To Cart</button>
+                <button onClick={handleAddToCart} className='btn-kidzplay mr-2 my-3'>Add To Cart</button>
                 <button className='btn-kidzplay'>Buy Now</button>
             </div>
         </div>

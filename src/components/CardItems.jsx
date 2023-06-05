@@ -8,7 +8,7 @@ const CardItems = ({ category }) => {
     const [toys, setToys] = useState([]);
 
     useEffect(() => {
-        fetch(`https://kidzplay-server.vercel.app/toy?subCategory=${categorys}`)
+        fetch(`http://localhost:5000/toy?subCategory=${categorys}`)
             .then(res => res.json())
             .then(data => {
                 setToys(data);

@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import app from '../firebase/firebase.config';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 
@@ -22,7 +23,7 @@ const AuthProviders = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const createUser = (email, password) => {
-
+        setLoading(true);
 
         // Validate password
         if (!/(?=.*[A-Z])/.test(password)) {
@@ -54,28 +55,43 @@ const AuthProviders = ({ children }) => {
     };
 
     const signIn = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
 
     const signInWithGoogle = () => {
+        setLoading(true);
         return signInWithPopup(auth, googleAuthProvider);
     };
 
     const logOut = () => {
+        setLoading(true);
+        signOut(auth);
         Swal.fire({
             icon: 'success',
             title: 'You have successfully logged out',
             showConfirmButton: false,
             timer: 1500
         })
-        signOut(auth);
     };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             console.log('auth state change', currentUser);
             setUser(currentUser);
-            setLoading(false);
+            // get and set jwt
+            if (currentUser) {
+                axios.post('http://localhost:5000/jwt', { email: currentUser.email })
+                    .then(data => {
+                        localStorage.setItem('access-token', data.data.token)
+                        setLoading(false);
+                    })
+            }
+            else {
+                localStorage.removeItem('access-token')
+            }
+
+            // setLoading(false);
         });
 
         return () => {

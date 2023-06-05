@@ -1,34 +1,41 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../providers/AuthProviders';
 import { Link } from 'react-router-dom';
 import { FcDeleteDatabase, FcEditImage } from 'react-icons/fc';
 import PageTitle from './PageTitle';
-import Spinner from './Spinner';
+import { BeatLoader } from "react-spinners";
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const MyToys = () => {
 
     const { user, loading } = useContext(AuthContext);
     const [toys, setToys] = useState([]);
+    const [axiosSecure] = useAxiosSecure();
 
-    useEffect(() => {
-        fetch(`https://kidzplay-server.vercel.app/mytoys?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setToys(data)
-            })
-    }, [user])
+
+    // tan stack query
+
+    const { data, isLoading, refetch } = useQuery({
+        queryKey: ['mytoys', user?.email],
+        enabled: !loading,
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/mytoys?email=${user?.email}`)
+            setToys(res.data);
+            return res.data;
+
+        }
+    })
+
 
     // handle sort by 
     const handleSortBy = event => {
         event.preventDefault();
         const type = event.target.value;
-
-        fetch(`https://kidzplay-server.vercel.app/mytoys?email=${user.email}&type=${type}`)
-            .then(res => res.json())
-            .then(data => {
-                setToys(data);
-            });
+        axiosSecure.get(`/mytoys?email=${user.email}&type=${type}`)
+            .then(res => setToys(res.data))
     };
 
 
@@ -44,18 +51,17 @@ const MyToys = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then(result => {
             if (result.isConfirmed) {
-                fetch(`https://kidzplay-server.vercel.app/toys/${id}`, {
+                fetch(`http://localhost:5000/toys/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => {
                         if (res.ok) {
+                            refetch();
                             Swal.fire(
                                 'Deleted!',
                                 'Your file has been deleted.',
                                 'success'
                             );
-                            const remaining = toys.filter(toy => toy._id !== id);
-                            setToys(remaining);
                         }
                     })
             }
@@ -94,9 +100,10 @@ const MyToys = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {loading
-                            ? <Spinner />
-                            : toys && toys.map((toy, index) => (
+                        {toys?.length === 0
+                            ? <div className='flex justify-center items-center'><BeatLoader size={64} color="rgb(255 107 107)" />
+                            </div>
+                            : toys?.map((toy, index) => (
                                 <tr key={index}>
                                     <th>{index + 1}</th>
                                     <td>{toy?.sellerName}</td>

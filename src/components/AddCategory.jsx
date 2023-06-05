@@ -8,7 +8,7 @@ const AddCategory = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch(`https://kidzplay-server.vercel.app/categorys`)
+        fetch(`http://localhost:5000/categorys`)
             .then(res => res.json())
             .then(data => {
                 setCategories(data)
@@ -24,7 +24,7 @@ const AddCategory = () => {
             category
         }
 
-        fetch('https://kidzplay-server.vercel.app/categorys', {
+        fetch('http://localhost:5000/categorys', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -55,7 +55,7 @@ const AddCategory = () => {
 
         const category = { category: updatedCategory };
 
-        fetch(`https://kidzplay-server.vercel.app/categorys/${id}`, {
+        fetch(`http://localhost:5000/categorys/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -88,7 +88,7 @@ const AddCategory = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then(result => {
             if (result.isConfirmed) {
-                fetch(`https://kidzplay-server.vercel.app/categorys/${id}`, {
+                fetch(`http://localhost:5000/categorys/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => {

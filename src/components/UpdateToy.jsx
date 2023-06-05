@@ -3,16 +3,18 @@ import { AuthContext } from '../providers/AuthProviders';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import PageTitle from './PageTitle';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const UpdateToy = () => {
 
+    const [axiosSecure] = useAxiosSecure();
     const { user } = useContext(AuthContext);
 
     const { _id, pictureUrl, price, productDescription, quantity, rating, subCategory, toyName } = useLoaderData();
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('https://kidzplay-server.vercel.app/categorys')
+        fetch('http://localhost:5000/categorys')
             .then(res => res.json())
             .then(data => {
                 setCategories(data)
@@ -52,16 +54,10 @@ const UpdateToy = () => {
             productDescription
         }
 
-        fetch(`https://kidzplay-server.vercel.app/toys/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(toy)
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.modifiedCount > 0) {
+
+        axiosSecure.put(`/toys/${_id}`, toy)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Update successfully',
@@ -70,7 +66,10 @@ const UpdateToy = () => {
                     })
                 }
                 navigate('/myToys')
-                console.log(data);
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
     return (

@@ -13,6 +13,8 @@ import AddCategory from "../components/AddCategory";
 import UpdateToy from "../components/UpdateToy";
 import PrivateRoute from "./PrivateRoute";
 import ToyDetails from "../components/ToyDetails";
+import Cart from "../pages/Cart/Cart";
+import Payment from "../pages/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -41,14 +43,22 @@ const router = createBrowserRouter([
                 element: <Blog></Blog>
             },
             {
+                path: 'payment',
+                element: <Payment></Payment>
+            },
+            {
+                path: 'cart',
+                element: <Cart></Cart>
+            },
+            {
                 path: 'add-new-toy',
                 element: <PrivateRoute><AddToy></AddToy></PrivateRoute>,
-                loader: () => fetch('https://kidzplay-server.vercel.app/categorys')
+                loader: () => fetch('http://localhost:5000/categorys')
             },
             {
                 path: 'allToys',
                 element: <AllToys></AllToys>,
-                loader: () => fetch('https://kidzplay-server.vercel.app/toys')
+                loader: () => fetch('http://localhost:5000/toys')
             },
             {
                 path: 'myToys',
@@ -57,12 +67,12 @@ const router = createBrowserRouter([
             {
                 path: 'toy-details/:id',
                 element: <PrivateRoute><ToyDetails></ToyDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`https://kidzplay-server.vercel.app/toys/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/toys/${params.id}`)
             },
             {
                 path: 'updateToy/:id',
                 element: <PrivateRoute><UpdateToy></UpdateToy></PrivateRoute>,
-                loader: ({ params }) => fetch(`https://kidzplay-server.vercel.app/toys/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/toys/${params.id}`)
             },
             {
                 path: 'add-new-category',
