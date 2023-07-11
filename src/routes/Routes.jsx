@@ -43,7 +43,7 @@ const router = createBrowserRouter([
                 element: <Blog></Blog>
             },
             {
-                path: 'payment',
+                path: 'payments',
                 element: <Payment></Payment>
             },
             {
@@ -53,12 +53,12 @@ const router = createBrowserRouter([
             {
                 path: 'add-new-toy',
                 element: <PrivateRoute><AddToy></AddToy></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/categorys')
+                loader: () => fetch('https://kidzplay-server.vercel.app/categorys')
             },
             {
                 path: 'allToys',
                 element: <AllToys></AllToys>,
-                loader: () => fetch('http://localhost:5000/toys')
+                loader: () => fetch('https://kidzplay-server.vercel.app/toys')
             },
             {
                 path: 'myToys',
@@ -67,12 +67,12 @@ const router = createBrowserRouter([
             {
                 path: 'toy-details/:id',
                 element: <PrivateRoute><ToyDetails></ToyDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/toys/${params.id}`)
+                loader: ({ params }) => fetch(`https://kidzplay-server.vercel.app/toys/${params.id}`)
             },
             {
                 path: 'updateToy/:id',
                 element: <PrivateRoute><UpdateToy></UpdateToy></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/toys/${params.id}`)
+                loader: ({ params }) => fetch(`https://kidzplay-server.vercel.app/toys/${params.id}`)
             },
             {
                 path: 'add-new-category',

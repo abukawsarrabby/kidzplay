@@ -12,7 +12,7 @@ const Users = () => {
         queryKey: ['mytoys', user?.email],
         enabled: !loading,
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/mytoys?email=${user?.email}`, {
+            const res = await fetch(`https://kidzplay-server.vercel.app/mytoys?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${token}`
                 }

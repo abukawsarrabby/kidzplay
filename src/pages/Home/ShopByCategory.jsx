@@ -10,20 +10,20 @@ const ShopByCategory = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/categorys')
+        fetch('https://kidzplay-server.vercel.app/categorys')
             .then(res => res.json())
             .then(data => {
                 setCategories(data)
             })
         AOS.init({
             // offset: 200,
-            duration: 200,
-            easing: 'ease-in-sine',
-            delay: 50,
+            duration: 2000,
+            easing: 'linear',
+            delay: 500,
         });
     }, [])
     return (
-        <div className='text-center min-h-screen'>
+        <div className='text-center min-h-screen overflow-x-hidden'>
             <h1 data-aos="zoom-in" className='text-5xl font-bold mt-10'> Shop By Category</h1>
             <p data-aos="zoom-in" className='my-5'>Discover a wide selection of products organized by category on our Shop By Category page.</p>
 

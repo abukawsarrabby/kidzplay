@@ -11,15 +11,15 @@ const Card = ({ toy }) => {
     useEffect(() => {
         AOS.init({
             offset: 200,
-            duration: 1000,
-            easing: 'ease-in-sine',
+            duration: 2000,
+            easing: 'linear',
             delay: 100,
         });
     }, [])
 
     return (
         <div>
-            <div data-aos="fade-down" className="card h-[25rem] w-[20rem] md:w-full mx-auto bg-base-100 mb-5 shadow-xl">
+            <div data-aos="fade-down" data-aos-once="true" className="card h-[25rem] w-[20rem] md:w-full mx-auto bg-base-100 mb-5 shadow-xl">
                 <figure className="rounded-3xl">
                     <LazyLoadImage
                         alt={toy?.toyName}

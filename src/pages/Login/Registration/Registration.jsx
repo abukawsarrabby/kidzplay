@@ -8,7 +8,7 @@ import PageTitle from '../../../components/PageTitle';
 
 const Register = () => {
 
-    const { user, createUser } = useContext(AuthContext);
+    const { user, setLoading, createUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleRegister = event => {
@@ -36,6 +36,7 @@ const Register = () => {
                 })
             })
             .catch(error => {
+                setLoading(false);
                 console.log(error)
                 Swal.fire({
                     icon: 'error',
@@ -46,11 +47,11 @@ const Register = () => {
             })
     }
 
-    useEffect(() => {
-        if (user) {
-            navigate('/');
-        }
-    }, [user, navigate]);
+    // useEffect(() => {
+    //     if (user) {
+    //         navigate('/');
+    //     }
+    // }, [user, navigate]);
 
     const updateUserData = (user, name, photoUrl) => {
         updateProfile(user, {
@@ -61,6 +62,7 @@ const Register = () => {
                 console.log("photoURL & name updated")
             })
             .catch(error => {
+                setLoading(false)
                 console.log(error.message)
             })
     }

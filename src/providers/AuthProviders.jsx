@@ -1,118 +1,109 @@
-import React, { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react'
 import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     getAuth,
     onAuthStateChanged,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
-    signOut
-} from "firebase/auth";
-import app from '../firebase/firebase.config';
-import Swal from 'sweetalert2';
-import axios from 'axios';
+    signOut,
+    updateProfile,
+} from 'firebase/auth'
+import { app } from '../firebase/firebase.config'
+import axios from 'axios'
+import { getRole } from '../api/Auth'
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext(null)
 
 const auth = getAuth(app);
-const googleAuthProvider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider()
 
-const AuthProviders = ({ children }) => {
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null)
+    const [role, setRole] = useState(null)
+    const [loading, setLoading] = useState(true)
 
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        if (user) {
+            getRole(user.email).then(data => setRole(data))
+        }
+    }, [user])
 
     const createUser = (email, password) => {
-        setLoading(true);
-
-        // Validate password
-        if (!/(?=.*[A-Z])/.test(password)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Please add at least one uppercase',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            return;
-        } else if (!/(?=.*[0-9].*[0-9])/.test(password)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Please add two numbers',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            return;
-        } else if (password.length < 6) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Please add a six-digit number',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            return;
-        }
-        return createUserWithEmailAndPassword(auth, email, password);
-    };
+        setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
 
     const signIn = (email, password) => {
-        setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password);
-    };
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
+    }
 
     const signInWithGoogle = () => {
-        setLoading(true);
-        return signInWithPopup(auth, googleAuthProvider);
-    };
+        setLoading(true)
+        return signInWithPopup(auth, googleProvider)
+    }
+
+    const resetPassword = email => {
+        setLoading(true)
+        return sendPasswordResetEmail(auth, email)
+    }
 
     const logOut = () => {
-        setLoading(true);
-        signOut(auth);
-        Swal.fire({
-            icon: 'success',
-            title: 'You have successfully logged out',
-            showConfirmButton: false,
-            timer: 1500
+        setLoading(true)
+        return signOut(auth)
+    }
+
+    const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photo,
         })
-    };
+    }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            console.log('auth state change', currentUser);
-            setUser(currentUser);
-            // get and set jwt
+            setUser(currentUser)
+            console.log('current user', currentUser)
+            // get and set token
             if (currentUser) {
-                axios.post('http://localhost:5000/jwt', { email: currentUser.email })
-                    .then(data => {
-                        localStorage.setItem('access-token', data.data.token)
-                        setLoading(false);
+                axios
+                    .post(`${import.meta.env.VITE_API_URL}/jwt`, {
+                        email: currentUser.email,
                     })
-            }
-            else {
+                    .then(data => {
+                        // console.log(data.data.token)
+                        localStorage.setItem('access-token', data.data.token)
+                        setLoading(false)
+                    })
+            } else {
                 localStorage.removeItem('access-token')
             }
-
-            // setLoading(false);
-        });
-
+            setLoading(false)
+        })
         return () => {
-            unsubscribe();
-        };
-    }, []);
+            return unsubscribe()
+        }
+    }, [])
 
     const authInfo = {
         user,
         loading,
+        setLoading,
         createUser,
         signIn,
         signInWithGoogle,
-        logOut
-    };
+        resetPassword,
+        logOut,
+        updateUserProfile,
+        role,
+        setRole,
+    }
 
     return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
-};
+        <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    )
+}
 
-export default AuthProviders;
+export default AuthProvider

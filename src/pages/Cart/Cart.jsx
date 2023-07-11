@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 const Cart = () => {
     const [cart, refetch] = useCart([]);
     const [axiosSecure] = useAxiosSecure();
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const price = parseFloat(total.toFixed(2))
 
     const handleDelete = id => {
         Swal.fire({
@@ -39,8 +41,8 @@ const Cart = () => {
         <div>
             <PageTitle title='Cart Items'></PageTitle>
             <div className='my-2 flex justify-between items-center'>
-                <h1 className='text-5xl text-center font-bold my-5'>Total toys: {cart?.length} in Cart</h1>
-                <Link to='/payment' className='btn-kidzplay' >Buy All</Link>
+                <h1 className='text-5xl text-center font-bold my-5'>Total toys: {cart?.length} in Cart and total price {price}</h1>
+                <Link to='/payments' className='btn-kidzplay' >Buy All</Link>
             </div>
             <div className="overflow-x-auto">
                 <table className="table table-compact w-full">

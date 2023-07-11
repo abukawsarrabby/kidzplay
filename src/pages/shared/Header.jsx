@@ -5,6 +5,7 @@ import { Tooltip } from 'react-tooltip';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FiShoppingCart } from 'react-icons/fi';
 import useCart from '../../hooks/useCart';
+import Spinner from '../../components/Spinner';
 
 const Header = () => {
 
@@ -28,7 +29,7 @@ const Header = () => {
         </>
 
     return (
-        <div className='lg:px-24'>
+        <div className='lg:px-12 bg-base-100'>
             <div className="navbar border-b border-base-300">
                 <div className="flex-1">
                     <Link to='/' className="normal-case text-5xl font-extrabold">Kidz<span className='text-coral'>Play</span></Link>
@@ -40,7 +41,7 @@ const Header = () => {
                     </Link>
                     <div className="dropdown dropdown-end">
                         <div className="navbar-end">
-                            {user && !loading ? (
+                            {user ? (
                                 <div className='flex'>
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         <div data-tooltip-id="tooltip" data-tooltip-content={user?.displayName} className="w-10 rounded-full">
@@ -57,8 +58,7 @@ const Header = () => {
                                         <li><button onClick={logOut} className='btn-link font-bold'>LogOut</button></li>
                                     </ul>
                                 </div>
-                            ) : (
-                                !loading && <Link to='/login' className="btn-kidzplay">Login</Link>
+                            ) : (<Link to='/login' className="btn-kidzplay">Login</Link>
                             )}
                         </div>
                     </div>
@@ -78,11 +78,7 @@ const Header = () => {
                     </div>
                     <div className="hidden lg:sticky top-0 lg:flex">
                         <ul className="flex gap-4 px-1">
-                            {loading
-                                ? <>
-                                    <progress className="progress w-96"></progress>
-                                </>
-                                : navItems}
+                            {navItems}
                         </ul>
                     </div>
                 </div>

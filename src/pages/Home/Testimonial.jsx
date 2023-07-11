@@ -4,7 +4,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Testimonial = ({ name, rating, picture }) => {
   return (
-    <section className="bg-gradient shadow-lg rounded-lg">
+    <section className="bg-gradient shadow-lg p-10 rounded-lg">
       <div className="container mx-auto">
         <div className="flex flex-wrap">
           <div className="">

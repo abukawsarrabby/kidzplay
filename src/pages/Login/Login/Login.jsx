@@ -7,7 +7,7 @@ import PageTitle from '../../../components/PageTitle';
 
 const Login = () => {
 
-    const { user, loading, signIn, signInWithGoogle } = useContext(AuthContext);
+    const { user, setLoading, loading, signIn, signInWithGoogle } = useContext(AuthContext);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -35,6 +35,7 @@ const Login = () => {
                 })
             })
             .catch(error => {
+                setLoading(false);
                 console.log(error);
                 Swal.fire({
                     icon: 'error',
@@ -46,11 +47,11 @@ const Login = () => {
     };
 
     // Redirect to homepage if user is available
-    useEffect(() => {
-        if (user) {
-            navigate('/');
-        }
-    }, [user, navigate]);
+    // useEffect(() => {
+    //     if (user) {
+    //         navigate('/');
+    //     }
+    // }, [user, navigate]);
 
     //handle sign in with google popup
     const handleGoogleSignIn = () => {
@@ -68,6 +69,7 @@ const Login = () => {
                 })
             })
             .catch(error => {
+                setLoading(false);
                 console.log(error);
                 Swal.fire({
                     icon: 'error',

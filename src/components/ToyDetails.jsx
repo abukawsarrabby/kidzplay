@@ -2,7 +2,7 @@ import { Rating } from '@smastrom/react-rating';
 import React from 'react';
 import { FcBookmark, FcManager, FcVoicemail } from 'react-icons/fc';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProviders';
@@ -65,7 +65,7 @@ const ToyDetails = () => {
                 <p><strong>Name: </strong>{toy?.sellerName}</p>
                 <p><strong>Email:</strong> {toy?.sellerEmail}</p>
                 <button onClick={handleAddToCart} className='btn-kidzplay mr-2 my-3'>Add To Cart</button>
-                <button className='btn-kidzplay'>Buy Now</button>
+                <Link to={`/payment/${_id}`} className='btn-kidzplay'>Buy Now</Link>
             </div>
         </div>
     );

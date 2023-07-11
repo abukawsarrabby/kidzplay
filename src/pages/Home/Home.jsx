@@ -11,10 +11,12 @@ const Home = () => {
         <div>
             <PageTitle title='Home Page'></PageTitle>
             <Banner></Banner>
-            <Gallery></Gallery>
-            <ShopByCategory></ShopByCategory>
-            <About></About>
-            <CustomerReview></CustomerReview>
+            <div className='max-w-6xl mx-auto'>
+                <Gallery></Gallery>
+                <ShopByCategory></ShopByCategory>
+                <About></About>
+                <CustomerReview></CustomerReview>
+            </div>
         </div>
     );
 };

@@ -15,6 +15,8 @@ const MyToys = () => {
     const [toys, setToys] = useState([]);
     const [axiosSecure] = useAxiosSecure();
 
+    console.log(loading)
+
 
     // tan stack query
 
@@ -51,7 +53,7 @@ const MyToys = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then(result => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/toys/${id}`, {
+                fetch(`https://kidzplay-server.vercel.app/toys/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => {

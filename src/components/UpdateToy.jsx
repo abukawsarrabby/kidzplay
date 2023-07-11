@@ -14,7 +14,7 @@ const UpdateToy = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/categorys')
+        fetch('https://kidzplay-server.vercel.app/categorys')
             .then(res => res.json())
             .then(data => {
                 setCategories(data)

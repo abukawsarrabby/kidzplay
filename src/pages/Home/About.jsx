@@ -8,8 +8,8 @@ const About = () => {
     useEffect(() => {
         AOS.init({
             offset: 200,
-            duration: 500,
-            easing: 'ease-in-sine',
+            duration: 2000,
+            easing: 'linear',
             delay: 1000,
         });
     }, [])
@@ -26,9 +26,10 @@ const About = () => {
                                     src='https://i.ibb.co/7njNhkw/main.jpg'
                                 />
                             </div>
-                            <div className="absolute  -left-7 -bottom-7 border-[20px] border-[#fff] bg-[#fff] rounded-none">
+                            <div
+                                data-aos="fade-right"
+                                className="absolute  -left-7 -bottom-7 border-[20px] border-[#fff] bg-[#fff] rounded-none">
                                 <LazyLoadImage
-                                    data-aos="fade-right"
                                     alt="Banner"
                                     src="https://i.ibb.co/tHNVVYX/corner.jpg"
                                     className='overflow-hidden'
@@ -46,8 +47,10 @@ const About = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="">
-                        <div className="relative">
+                    <div className="overflow-x-hidden">
+                        <div
+                            data-aos="fade-left"
+                            className="relative">
                             <div className="relative max-w-[640px]">
                                 <span className="font-bold text-coral">About us</span>
                                 <h3 className="text-6xl my-5 font-extrabold">

@@ -12,7 +12,7 @@ const AllToys = () => {
     const handleSearch = event => {
         event.preventDefault();
         const query = searchRef.current.value;
-        fetch(`http://localhost:5000/search?toyName=${query}`)
+        fetch(`https://kidzplay-server.vercel.app/search?toyName=${query}`)
             .then(res => res.json())
             .then(data => {
                 setSearchQuery(data);

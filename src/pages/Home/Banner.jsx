@@ -1,43 +1,37 @@
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "./Banner.css";
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper";
 
 const Banner = () => {
     return (
-        <div className="carousel h-72">
-            <div id="slide1" className="carousel-item relative w-full">
-               <LazyLoadImage
-                    alt="Banner"
-                    src="https://i.ibb.co/V2XzYS0/banner1.jpg"
-                    className="w-full"
-                />
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide3" className="btn btn-circle">❮</a>
-                    <a href="#slide2" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide2" className="carousel-item relative w-full">
-               <LazyLoadImage
-                    alt="Banner"
-                    src="https://i.ibb.co/XJpS3F4/banner2.jpg"
-                    className="w-full"
-                />
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide1" className="btn btn-circle">❮</a>
-                    <a href="#slide3" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide3" className="carousel-item relative w-full">
-               <LazyLoadImage
-                    alt="Banner"
-                    src="https://i.ibb.co/NmsTM39/banner.jpg"
-                    className="w-full"
-                />
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide2" className="btn btn-circle">❮</a>
-                    <a href="#slide1" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-        </div>
+        <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+            }}
+            loop={true}
+            pagination={{
+                clickable: true,
+            }}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="mySwiper"
+        >
+            <SwiperSlide><LazyLoadImage src="https://i.ibb.co/g3znk6H/kidz1.jpg" alt="" /></SwiperSlide>
+            {/* <SwiperSlide><LazyLoadImage src="https://i.ibb.co/BnQyQ9t/7438290-32611.jpg" alt="" /></SwiperSlide> */}
+        </Swiper>
     );
 };
 
