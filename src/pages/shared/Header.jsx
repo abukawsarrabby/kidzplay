@@ -29,12 +29,29 @@ const Header = () => {
         </>
 
     return (
-        <div className='lg:px-12 bg-base-100'>
-            <div className="navbar border-b border-base-300">
-                <div className="flex-1">
-                    <Link to='/' className="normal-case text-5xl font-extrabold">Kidz<span className='text-coral'>Play</span></Link>
+        <div className="navbar bg-base-100 lg:px-16 z-10 shadow fixed top-0 right-0 py-5">
+            <div className="navbar-start">
+                <Link to='/' className="normal-case text-5xl font-extrabold">Kidz<span className='text-coral'>Play</span></Link>
+            </div>
+            <div className="navbar-center">
+                <div className="dropdown lg:hidden">
+                    <label tabIndex={0} className="btn btn-ghost">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </label>
+                    <ul tabIndex={0} className="space-y-4 dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        {navItems}
+                    </ul>
                 </div>
-                <div className="flex-none gap-5">
+                <div className="hidden lg:block">
+                    <ul className="flex gap-4 px-1 justify-center items-center font-medium text-lg">
+                        {navItems}
+                    </ul>
+                </div>
+            </div>
+            <div className="navbar-end">
+                <div className='flex justify-around items-center gap-5'>
                     <Link to={'/cart'} className="relative inline-block">
                         <FiShoppingCart className='text-3xl'></FiShoppingCart>
                         <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-[#fff] transform translate-x-1/2 -translate-y-1/2 bg-coral rounded-full">{cart?.length || 0}</span>
@@ -45,7 +62,7 @@ const Header = () => {
                                 <div className='flex'>
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         <div data-tooltip-id="tooltip" data-tooltip-content={user?.displayName} className="w-10 rounded-full">
-                                            <LazyLoadImage src={user?.photoURL} alt="User Avatar" />
+                                            <img src={user?.photoURL} alt="User Avatar" />
                                             <Tooltip id='tooltip' />
                                         </div>
                                     </label>
@@ -61,25 +78,6 @@ const Header = () => {
                             ) : (<Link to='/login' className="btn-kidzplay">Login</Link>
                             )}
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div className="navbar">
-                <div className="navbar-start">
-                    <div className="dropdown">
-                        <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
-                        </label>
-                        <ul tabIndex={0} className="space-y-4 dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            {navItems}
-                        </ul>
-                    </div>
-                    <div className="hidden lg:sticky top-0 lg:flex">
-                        <ul className="flex gap-4 px-1">
-                            {navItems}
-                        </ul>
                     </div>
                 </div>
             </div>

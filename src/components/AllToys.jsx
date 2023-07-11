@@ -21,7 +21,7 @@ const AllToys = () => {
 
 
     return (
-        <div className='px-5'>
+        <div className='px-5 lg:px-18'>
             <PageTitle title='All Toys'></PageTitle>
             <h1 className='text-5xl text-center font-bold my-10'>Total toys: {toys?.length}</h1>
             <div className='flex justify-center items-center my-5'>

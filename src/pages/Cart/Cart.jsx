@@ -37,8 +37,11 @@ const Cart = () => {
             }
         })
     }
+    if(cart==false){
+        return <h1 className='p-20 flex justify-center items-center text-2xl font-medium'>No Cart Item</h1>
+    }
     return (
-        <div>
+        <div className='p-20'>
             <PageTitle title='Cart Items'></PageTitle>
             <div className='my-2 flex justify-between items-center'>
                 <h1 className='text-5xl text-center font-bold my-5'>Total toys: {cart?.length} in Cart and total price {price}</h1>

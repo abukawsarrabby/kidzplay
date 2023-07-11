@@ -11,7 +11,7 @@ const Home = () => {
         <div>
             <PageTitle title='Home Page'></PageTitle>
             <Banner></Banner>
-            <div className='max-w-6xl mx-auto'>
+            <div className='px-16'>
                 <Gallery></Gallery>
                 <ShopByCategory></ShopByCategory>
                 <About></About>

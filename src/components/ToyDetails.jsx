@@ -1,6 +1,6 @@
 import { Rating } from '@smastrom/react-rating';
 import React from 'react';
-import { FcBookmark, FcManager, FcVoicemail } from 'react-icons/fc';
+import { FcManager } from 'react-icons/fc';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useLoaderData } from 'react-router-dom';
 import useAxiosSecure from '../hooks/useAxiosSecure';

@@ -29,8 +29,9 @@ const Banner = () => {
             modules={[Autoplay, Pagination, Navigation]}
             className="mySwiper"
         >
-            <SwiperSlide><LazyLoadImage src="https://i.ibb.co/g3znk6H/kidz1.jpg" alt="" /></SwiperSlide>
-            {/* <SwiperSlide><LazyLoadImage src="https://i.ibb.co/BnQyQ9t/7438290-32611.jpg" alt="" /></SwiperSlide> */}
+            <SwiperSlide><LazyLoadImage src="https://i.ibb.co/vP86cg9/kidz2.jpg" alt="" /></SwiperSlide>
+            <SwiperSlide><LazyLoadImage src="https://i.ibb.co/SdFpBgF/kidz.jpg" alt="" /></SwiperSlide>
+            <SwiperSlide><LazyLoadImage src="https://i.ibb.co/ZYqkZms/kidz1.jpg" alt="" /></SwiperSlide>
         </Swiper>
     );
 };

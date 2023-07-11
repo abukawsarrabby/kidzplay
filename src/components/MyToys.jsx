@@ -73,7 +73,7 @@ const MyToys = () => {
 
 
     return (
-        <div>
+        <div className='lg:px-18'>
             <PageTitle title='My Toys'></PageTitle>
             <h1 className='text-5xl text-center font-bold mt-10'>My toys: {toys?.length}</h1>
             <div className="w-1/3 my-5 mx-auto">
