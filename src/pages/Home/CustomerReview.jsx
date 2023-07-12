@@ -14,7 +14,7 @@ const CustomerReview = () => {
         });
     }, [])
     return (
-        <div data-aos="zoom-in" className='text-center py-10 mx-auto'>
+        <div data-aos="zoom-in" data-aos-once="true" className='text-center py-10 mx-auto'>
             <h1 className='text-5xl font-bold mt-10'> CustomerReview</h1>
             <p className='my-5'>Discover a wide selection of products review from our client.</p>
             <div className="grid md:grid-cols-3 gap-5">

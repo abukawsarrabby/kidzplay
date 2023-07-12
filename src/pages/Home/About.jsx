@@ -20,7 +20,7 @@ const About = () => {
                     <div className="">
                         <div
                             className="relative">
-                            <div data-aos="zoom-in">
+                            <div data-aos="zoom-in" data-aos-once="true">
                                 <LazyLoadImage
                                     alt="Banner"
                                     src='https://i.ibb.co/7njNhkw/main.jpg'
@@ -28,6 +28,7 @@ const About = () => {
                             </div>
                             <div
                                 data-aos="fade-right"
+                                data-aos-once="true"
                                 className="absolute  -left-7 -bottom-7 border-[20px] border-[#fff] bg-[#fff] rounded-none">
                                 <LazyLoadImage
                                     alt="Banner"
@@ -35,7 +36,7 @@ const About = () => {
                                     className='overflow-hidden'
                                 />
                             </div>
-                            <div data-aos="zoom-in" className="absolute right-0 top-0 bg-coral p-5 text-2xl mt-0 min-w-[300px] text-[#fff]">
+                            <div data-aos="zoom-in" data-aos-once="true" className="absolute right-0 top-0 bg-coral p-5 text-2xl mt-0 min-w-[300px] text-[#fff]">
                                 <span className='flex justify-center items-center'>
                                     <p className="counter text-[78px] min-w-[99px] font-bold" data-from="0" data-to="25">
                                         25
@@ -50,6 +51,7 @@ const About = () => {
                     <div className="overflow-x-hidden">
                         <div
                             data-aos="fade-left"
+                            data-aos-once="true"
                             className="relative">
                             <div className="relative max-w-[640px]">
                                 <span className="font-bold text-coral">About us</span>
