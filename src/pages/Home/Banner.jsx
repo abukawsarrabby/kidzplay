@@ -29,7 +29,7 @@ const Banner = () => {
             modules={[Autoplay, Pagination, Navigation]}
             className="mySwiper"
         >
-            <SwiperSlide><img src="https://i.ibb.co/vP86cg9/kidz2.jpg" alt="" /></SwiperSlide>
+            <SwiperSlide><img src="https://i.ibb.co/kMkLBmr/kidz2.jpg" alt="" /></SwiperSlide>
             <SwiperSlide><LazyLoadImage src="https://i.ibb.co/SdFpBgF/kidz.jpg" alt="" /></SwiperSlide>
             <SwiperSlide><LazyLoadImage src="https://i.ibb.co/ZYqkZms/kidz1.jpg" alt="" /></SwiperSlide>
         </Swiper>

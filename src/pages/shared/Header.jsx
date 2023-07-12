@@ -45,7 +45,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="hidden lg:block">
-                    <ul className="flex gap-4 px-1 justify-center items-center font-medium text-lg">
+                    <ul className="flex gap-4 px-1 justify-center items-center font-bold text-lg">
                         {navItems}
                     </ul>
                 </div>

@@ -22,26 +22,26 @@ const Gallery = () => {
                     <LazyLoadImage
                         alt="Banner"
                         src="https://i.ibb.co/7Yb92vx/car1.jpg"
-                        className="h-1/2 md:h-full"
+                        className="h-1/2 md:h-fit"
                     />
                     <LazyLoadImage
                         alt="Banner"
                         src="https://i.ibb.co/YkJrbDP/giorgio-trovato.jpg"
-                        className="md:h-full"
+                        className=""
                     />
                 </div>
                 <div data-aos="fade-up" data-aos-once="true" className='h-[280px] md:h-full overflow-hidden'>
                     <LazyLoadImage
                         alt="Banner"
                         src="https://i.ibb.co/L6k24PW/ivan.jpg"
-                        className="h-full overflow-hidden"
+                        className="h-full overflow-y-hidden"
                     />
                 </div>
                 <div data-aos="fade-left" data-aos-once="true" className="h-[280px] md:h-full">
                     <LazyLoadImage
                         alt="Banner"
                         src="https://i.ibb.co/ZYxZp52/gimmel.jpg"
-                        className="h-1/2 md:h-full"
+                        className="h-1/2 md:h-fit"
                     />
                     <LazyLoadImage
                         alt="Banner"
