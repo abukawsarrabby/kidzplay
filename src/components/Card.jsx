@@ -19,17 +19,17 @@ const Card = ({ toy }) => {
 
     return (
         <div>
-            <div data-aos="fade-down" data-aos-once="true" className="card h-[25rem] w-[20rem] md:w-full mx-auto bg-base-100 mb-5 shadow-xl">
+            <div data-aos="fade-down" data-aos-once="true" className="card h-[25rem] w-[20rem] md:w-full mx-auto bg-base-100 shadow">
                 <figure className="rounded-3xl">
                     <LazyLoadImage
                         alt={toy?.toyName}
                         src={toy?.pictureUrl}
-                        className="rounded-3xl p-5 h-60 w-[30rem]"
+                        className="rounded-3xl"
                     />
                 </figure>
                 <div className="card-body items-center">
                     <div className="">
-                        <h2 className="card-title">{toy?.toyName}</h2>
+                        <h2 className="text-lg font-medium">{toy?.toyName}</h2>
                         <p className='font-bold text-3xl text-coral'>${toy?.price}</p>
                     </div>
                     <div className="space-y-4">

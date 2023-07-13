@@ -18,18 +18,17 @@ const CardItems = ({ category }) => {
 
 
     return (
-        <div>
-            <div className="grid md:grid-cols-4 gap-5 my-10">
-                {toys &&
-                    toys?.map(toy =>
-                        <Card
-                            key={toy._id}
-                            toy={toy}
-                        ></Card>
-                    )
-                }
-            </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 my-20">
+            {toys &&
+                toys?.slice(0, 3).map(toy =>
+                    <Card
+                        key={toy._id}
+                        toy={toy}
+                    ></Card>
+                )
+            }
         </div>
+
     );
 };
 
