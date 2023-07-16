@@ -1,5 +1,4 @@
 import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -30,8 +29,8 @@ const Banner = () => {
             className="mySwiper"
         >
             <SwiperSlide><img src="https://i.ibb.co/kMkLBmr/kidz2.jpg" alt="" /></SwiperSlide>
-            <SwiperSlide><LazyLoadImage src="https://i.ibb.co/SdFpBgF/kidz.jpg" alt="" /></SwiperSlide>
-            <SwiperSlide><LazyLoadImage src="https://i.ibb.co/ZYqkZms/kidz1.jpg" alt="" /></SwiperSlide>
+            <SwiperSlide><img src="https://i.ibb.co/SdFpBgF/kidz.jpg" alt="" /></SwiperSlide>
+            <SwiperSlide><img src="https://i.ibb.co/ZYqkZms/kidz1.jpg" alt="" /></SwiperSlide>
         </Swiper>
     );
 };

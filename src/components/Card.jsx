@@ -19,7 +19,7 @@ const Card = ({ toy }) => {
 
     return (
         <div>
-            <div data-aos="fade-down" data-aos-once="true" className="card w-64 h-96 bg-base-100 mx-auto shadow">
+            <div data-aos="fade-down" data-aos-once="true" className="card h-96 bg-base-100 mx-auto shadow">
                 <figure className="rounded-3xl">
                     <LazyLoadImage
                         alt={toy?.toyName}

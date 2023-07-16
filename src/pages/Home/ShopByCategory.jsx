@@ -30,7 +30,7 @@ const ShopByCategory = () => {
                 <p data-aos="zoom-in" data-aos-once="true" className='my-5'>Discover a wide selection of products organized by category on our Shop By Category page.</p>
             </div>
             <div className='md:grid md:grid-cols-12 gap-5'>
-                <div data-aos="fade-right" data-aos-once="true" className='rounded-xl col-span-4 my-5'>
+                <div data-aos="fade-right" data-aos-once="true" className='rounded-xl col-span-4 my-8'>
                     <div className="relative group rounded-lg duration-500 overflow-hidden">
                         <LazyLoadImage
                             src='https://i.ibb.co/Nm5YjjG/hrbanner-53b30e8c.jpg'
