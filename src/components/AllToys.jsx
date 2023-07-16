@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import PageTitle from './PageTitle';
+import Card from './Card';
 
 const AllToys = () => {
 
@@ -23,7 +24,7 @@ const AllToys = () => {
     return (
         <div className='px-5 lg:px-18'>
             <PageTitle title='All Toys'></PageTitle>
-            <h1 className='text-5xl text-center font-bold my-10'>Total toys: {toys?.length}</h1>
+            <h1 className='text-5xl text-center font-bold mt-28'>Total toys: {toys?.length}</h1>
             <div className='flex justify-center items-center my-5'>
                 <input
                     type="text"
@@ -33,36 +34,15 @@ const AllToys = () => {
                 />
                 <button className='btn-kidzplay' onClick={handleSearch}>Search</button>
             </div>
-            <div className="overflow-x-auto">
-                <table className="table table-compact w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Seller</th>
-                            <th>Toy Name</th>
-                            <th>Sub-category</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>See Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {searchQuery?.map((toy, index) => (
-                            <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{toy?.sellerName}</td>
-                                <td>{toy?.toyName}</td>
-                                <td>{toy?.subCategory}</td>
-                                <td>{'$' + toy?.price}</td>
-                                <td>{toy?.quantity}</td>
-                                <td>
-                                    <Link to={`/toy-details/${toy._id}`} className='btn-kidzplay'>View Details</Link>
-                                </td>
-
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 mt-20 gap-5 mx-auto">
+                {searchQuery &&
+                    searchQuery?.map(toy =>
+                        <Card
+                            key={toy._id}
+                            toy={toy}
+                        ></Card>
+                    )
+                }
             </div>
         </div>
     );
