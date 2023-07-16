@@ -19,12 +19,12 @@ const Card = ({ toy }) => {
 
     return (
         <div>
-            <div data-aos="fade-down" data-aos-once="true" className="card h-[25rem] w-[20rem] md:w-full mx-auto bg-base-100 shadow">
+            <div data-aos="fade-down" data-aos-once="true" className="card w-64 h-96 bg-base-100 mx-auto shadow">
                 <figure className="rounded-3xl">
                     <LazyLoadImage
                         alt={toy?.toyName}
                         src={toy?.pictureUrl}
-                        className="rounded-3xl"
+                        className="rounded-3xl object-cover"
                     />
                 </figure>
                 <div className="card-body items-center">
@@ -33,7 +33,7 @@ const Card = ({ toy }) => {
                         <p className='font-bold text-3xl text-coral'>${toy?.price}</p>
                     </div>
                     <div className="space-y-4">
-                        <h2 className='text-sm font-bold text-center'>
+                        <h2 className='text-sm font-bold'>
                             <Rating
                                 className='text-xs mx-auto'
                                 style={{ maxWidth: 80 }}
@@ -43,7 +43,7 @@ const Card = ({ toy }) => {
                                 fullSymbol={<i className="fas fa-star"></i>}
                             ></Rating>
                         </h2>
-                        <div className='text-center'>
+                        <div className=''>
                             <Link to={`/toy-details/${toy._id}`} className='btn-kidzplay'>View Details</Link>
                         </div>
                     </div>

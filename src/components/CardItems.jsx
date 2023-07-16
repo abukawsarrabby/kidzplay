@@ -18,7 +18,7 @@ const CardItems = ({ category }) => {
 
 
     return (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 my-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-20 gap-5 mx-auto">
             {toys &&
                 toys?.slice(0, 3).map(toy =>
                     <Card

@@ -24,14 +24,14 @@ const ShopByCategory = () => {
         });
     }, [])
     return (
-        <div className='min-h-screen overflow-x-hidden'>
+        <div className='overflow-x-hidden my-10'>
             <div className='text-center'>
                 <h1 data-aos="zoom-in" data-aos-once="true" className='text-5xl font-bold mt-10'> Shop By Category</h1>
                 <p data-aos="zoom-in" data-aos-once="true" className='my-5'>Discover a wide selection of products organized by category on our Shop By Category page.</p>
             </div>
-            <div className='grid grid-cols-4 gap-5'>
-                <div data-aos="fade-right" className='rounded-xl h-full col-span-1'>
-                    <div className="relative group w-full rounded-lg duration-500 overflow-hidden">
+            <div className='md:grid md:grid-cols-12 gap-5'>
+                <div data-aos="fade-right" data-aos-once="true" className='rounded-xl col-span-4 my-5'>
+                    <div className="relative group rounded-lg duration-500 overflow-hidden">
                         <LazyLoadImage
                             src='https://i.ibb.co/Nm5YjjG/hrbanner-53b30e8c.jpg'
                             alt='poster'
@@ -46,12 +46,12 @@ const ShopByCategory = () => {
                         </div>
                     </div>
                 </div>
-                <div className='col-span-3'>
+                <div className='col-span-8'>
                     <Tabs>
                         <TabList>
                             {categories &&
                                 categories?.map(category => (
-                                    <Tab key={category?._id}><span className='font-bold text-2xl my-5 text-white'>{category?.category}</span></Tab>
+                                    <Tab key={category?._id}><span className='font-bold text-2xl text-white'>{category?.category}</span></Tab>
                                 ))}
                         </TabList>
 
